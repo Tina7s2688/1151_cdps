@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102b2b">
+  <title>G1 W12 Checkpoint · Breakfast Atlas</title>
+  <style>
+    :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:#12302e;background:#f4f7f5;font-size:16px}
+    *{box-sizing:border-box}body{margin:0}button{font:inherit}button:focus-visible{outline:3px solid #e78038;outline-offset:3px}
+    .app{min-height:100svh;display:grid;grid-template-rows:auto auto 1fr auto;background:radial-gradient(circle at 86% 10%,#dceee5 0,transparent 30%),#f4f7f5}
+    .top{position:sticky;top:0;z-index:20;padding:.65rem clamp(1rem,4vw,3.5rem);display:flex;justify-content:space-between;align-items:center;gap:1rem;border-bottom:1px solid #d9e4df;background:#f4f7f5ed;backdrop-filter:blur(10px)}
+    .brand{display:flex;align-items:center;gap:.75rem;font-weight:850;letter-spacing:-.035em}.brandmark{width:2.25rem;height:2.25rem;border-radius:.7rem;background:#ea7840;color:white;display:grid;place-items:center;font-size:.8rem;letter-spacing:0}
+    .course{color:#53716b;font-size:.83rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase}.header-actions{display:flex;align-items:center;gap:.6rem}.draft{font-size:.75rem;letter-spacing:.08em;color:#905124;border:1px solid #edc3a4;background:#fff6ee;padding:.35rem .65rem;border-radius:99px;font-weight:800}.lang-toggle{border:1px solid #b6d1c2;background:#fff;color:#123b35;border-radius:99px;padding:.4rem .8rem;cursor:pointer;font-weight:850;white-space:nowrap}
+    nav{display:flex;gap:.45rem;overflow-x:auto;padding:.5rem clamp(1rem,4vw,3.5rem);scrollbar-width:thin;background:#fff9}
+    .tab{flex:0 0 auto;border:1px solid #d8e4de;background:#fff;color:#365e57;border-radius:99px;padding:.55rem .85rem;font-size:.85rem;font-weight:750;cursor:pointer;white-space:nowrap}.tab[aria-current="step"]{background:#123b35;border-color:#123b35;color:#fff}
+    main{width:min(1240px,100%);margin:auto;padding:clamp(.75rem,2vw,1.25rem);display:grid;align-items:center}
+    .slide{width:100%;animation:enter .35s ease both}.slide[hidden]{display:none!important}@keyframes enter{from{opacity:.25;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    .eyebrow{display:flex;align-items:center;gap:.6rem;color:#e36f35;font-weight:850;letter-spacing:.12em;text-transform:uppercase;font-size:.82rem;margin:0 0 .45rem}.dot{width:.5rem;height:.5rem;border-radius:50%;background:#e36f35}
+    h1{font-size:clamp(2.1rem,4vw,3.5rem);line-height:1.05;letter-spacing:-.065em;margin:.1rem 0 .55rem;max-width:1000px}h2{font-size:clamp(1.35rem,2.3vw,2rem);letter-spacing:-.035em;margin:0 0 .5rem}p{line-height:1.4}.lead{font-size:clamp(1rem,1.35vw,1.2rem);color:#476b63;max-width:860px;margin:0 0 1rem}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:.7rem}.card{background:#fff;border:1px solid #deebe4;border-radius:1.1rem;padding:clamp(.85rem,1.3vw,1.1rem);box-shadow:0 16px 42px #1a45380b}.metric{grid-column:span 4}.wide{grid-column:span 8}.half{grid-column:span 6}.full{grid-column:1/-1}.kicker{font-size:.8rem;text-transform:uppercase;letter-spacing:.09em;font-weight:850;color:#66857b;margin:0 0 .5rem}.big{font-size:clamp(2.7rem,4vw,3.5rem);line-height:1;font-weight:900;letter-spacing:-.07em;color:#113e36;margin:.15rem 0 .35rem}.unit{font-size:1.05rem;color:#58746c;font-weight:700}.small{font-size:.88rem;color:#638078;line-height:1.4;margin:.35rem 0 0}.pill{display:inline-block;border-radius:99px;padding:.33rem .62rem;background:#e8f3ec;color:#286147;font-size:.75rem;font-weight:850;text-transform:uppercase;letter-spacing:.06em}.pill.warn{background:#fff0dc;color:#9b5722}.pill.block{background:#fce9e4;color:#a84132}.card h3{font-size:1.2rem;margin:.3rem 0 .5rem;letter-spacing:-.025em}.card ul{margin:.5rem 0 0;padding-left:1.2rem;line-height:1.45;color:#385e55}.card li+li{margin-top:.2rem}
+    .chain{display:flex;align-items:center;gap:.55rem;flex-wrap:wrap;margin:.65rem 0}.chain span{background:#e5f1ea;border-radius:.7rem;padding:.5rem .7rem;font-weight:800;font-size:.84rem}.chain b{color:#e47b40}
+    .statusline{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}.statusline>div{border:1px solid #dce9e2;border-radius:1rem;padding:1rem;background:#fff}.statusline strong{display:block;font-size:1rem;margin:.2rem 0}.statusline p{font-size:.86rem;color:#608077;margin:.2rem 0}
+    .range{margin:1rem 0}.range-head{display:flex;justify-content:space-between;gap:1rem;font-weight:800;margin-bottom:.35rem}.track{height:1.1rem;border-radius:99px;background:#e5eee8;position:relative}.track:after{content:"500 m";position:absolute;right:0;top:-1.35rem;color:#789086;font-size:.72rem;font-weight:700}.bar{height:100%;border-radius:99px;background:linear-gradient(90deg,#7ac49d,#e87c42)}.bar.candidate{background:linear-gradient(90deg,#a8c4af,#7caa9b)}.range small{display:block;margin-top:.4rem;color:#627c73}
+    .stack{display:flex;height:2rem;border-radius:99px;overflow:hidden;margin:.85rem 0}.stack .done{width:17.39%;background:#308864}.stack .pending{flex:1;background:#e4b26b}.legend{display:flex;gap:1rem;flex-wrap:wrap;font-size:.9rem;color:#4b6a60;font-weight:700}.legend i{display:inline-block;width:.7rem;height:.7rem;border-radius:50%;margin-right:.4rem}.legend .green{background:#308864}.legend .amber{background:#e4b26b}
+    .review-totals{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin:.35rem 0}.review-total{padding:.65rem .8rem;border-radius:.85rem;display:flex;align-items:baseline;gap:.55rem}.review-total strong{font-size:1.8rem;line-height:1}.review-total.confirmed{background:#e8f3ec;color:#286147}.review-total.pending{background:#fff0dc;color:#9b5722}
+    .process{display:grid;grid-template-columns:repeat(4,1fr);gap:.65rem}.process div{padding:.85rem;border-radius:.8rem;background:#e7f2eb;font-weight:800;text-align:center}.process small{display:block;color:#65857a;font-weight:650;margin-top:.3rem}
+    .overview{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin:0 0 .8rem}.overview>div{padding:.75rem 1rem;border-radius:.9rem;background:#e9f2ec;border:1px solid #d6e6dc}.overview>div:last-child{background:#fff8f2;border-color:#f1ddca}.overview strong{display:block;font-size:.95rem;margin:.15rem 0}.overview p{font-size:.84rem;color:#56736a;margin:.2rem 0 0}
+    .district-chart{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.4rem 1.1rem}.district-row{display:grid;grid-template-columns:4.2rem 1fr 1.4rem;align-items:center;gap:.5rem;font-size:.82rem;color:#365e57}.district-track,.ratio-track,.qa-track,.topic-track{height:.58rem;background:#e6eee9;border-radius:99px;overflow:hidden}.district-track i,.ratio-track i,.qa-track i,.topic-track i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#63af87,#318768)}.district-row b{text-align:right;color:#183f37}.ratio-track{height:.8rem;margin:.7rem 0 .35rem}.ratio-track i{background:#318768}.ratio-label,.qa-row{display:flex;justify-content:space-between;gap:.6rem;font-size:.8rem;color:#56736a}.qa-list,.topic-list{display:grid;gap:.55rem}.qa-row{align-items:center}.qa-row span{min-width:6.5rem}.qa-row b{min-width:3rem;text-align:right;color:#183f37}.qa-track{display:flex;flex:1}.qa-track .issue{background:#e4b26b}.topic-row{display:grid;grid-template-columns:minmax(8rem,1.2fr) 3fr 1.5rem;align-items:center;gap:.55rem;font-size:.82rem}.topic-row b{text-align:right}.topic-track i{background:linear-gradient(90deg,#82bfa0,#538ca4)}
+    .audit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem}.audit-box{padding:.8rem;border:1px solid #dce9e2;background:#f9fbf9;border-radius:.85rem}.audit-box strong{display:block;color:#173e36;font-size:1.1rem;margin:.25rem 0}.audit-box p{font-size:.84rem;color:#607b72;margin:.2rem 0}.audit-label{font-size:.75rem;font-weight:850;letter-spacing:.05em;text-transform:uppercase;color:#66857b}
+    .next{border-left:4px solid #ee864e;background:#fff8f2;border-radius:.25rem .9rem .9rem .25rem;padding:.6rem .8rem;color:#75482d;line-height:1.4;font-weight:650}.next b{color:#b55b27}
+    footer{border-top:1px solid #d9e4df;padding:.5rem clamp(1rem,4vw,3.5rem);display:flex;align-items:center;justify-content:space-between;gap:1rem;color:#607a72;font-size:.8rem}.controls{display:flex;align-items:center;gap:.55rem}.controls button{border:1px solid #cdded5;background:#fff;color:#143b34;border-radius:.65rem;padding:.5rem .75rem;cursor:pointer;font-weight:800}.controls button:disabled{opacity:.35;cursor:not-allowed}.count{font-weight:850;color:#244e43;min-width:3rem;text-align:center}
+    @media(max-width:800px){.metric,.wide,.half{grid-column:span 6}.process{grid-template-columns:repeat(2,1fr)}.top{padding:.75rem 1rem}}
+    .bar{position:absolute;top:0;height:100%;min-width:6px}.track:after{content:none}.scale{display:flex;justify-content:space-between;color:#789086;font-size:.72rem;font-weight:700}
+    @media(max-width:560px){.brand span:last-child{font-size:.9rem}.course,.draft{display:none}main{display:block;padding:1.25rem 1rem 2rem}.metric,.wide,.half{grid-column:1/-1}.statusline{grid-template-columns:1fr}.lead{margin-bottom:1.2rem}.card{padding:1rem}.grid{gap:.7rem}.overview{grid-template-columns:1fr}.district-chart{grid-template-columns:1fr}.topic-row{grid-template-columns:minmax(7rem,1fr) 2fr 1.2rem}.qa-row span{min-width:5.5rem}.audit-grid{grid-template-columns:1fr}footer{font-size:.72rem}.hint{display:none}}
+    @media(prefers-reduced-motion:reduce){.slide{animation:none}}
+    @media print{.app{display:block;background:#fff}nav,footer,.draft{display:none}.slide[hidden]{display:block!important}.slide{break-after:page;min-height:90vh;padding:1rem 0}.card{box-shadow:none}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <header class="top"><div class="brand"><span class="brandmark">G1</span><span>Breakfast Atlas <span class="course">· W12 Checkpoint</span></span></div><div class="header-actions"><span class="draft">TEAM REVIEW DRAFT</span><button id="lang-toggle" class="lang-toggle" type="button" aria-label="Switch to Chinese" lang="zh-Hant">中文</button></div></header>
+  <nav aria-label="Presentation sections" id="tabs">
+    <button class="tab" data-go="0" aria-current="step">Angus · A1</button><button class="tab" data-go="1">KoKo · A2</button><button class="tab" data-go="2">Natalia · B</button><button class="tab" data-go="3">Ruby · C/D</button><button class="tab" data-go="4">Kenny · Review</button><button class="tab" data-go="5">Tina · Act</button>
+  </nav>
+  <main id="slides">
+    <section class="slide" data-slide="0" aria-labelledby="s0"><p class="eyebrow"><span class="dot"></span> Test A1 · Angus</p><h1 id="s0">Can we collect Q Burger stores?</h1><p class="lead">We tested the data-to-website path before building the report site: stores, local geography, Agent output, verification, and cloud execution.</p><div class="overview"><div><span class="kicker">W12 test question</span><strong>Can our workflow turn collected data into a verified website update?</strong></div><div><span class="kicker">Overall result</span><strong>One local Agent run worked; automatic cloud updates are not yet proven.</strong></div></div><div class="grid"><div class="card metric"><p class="kicker">Taipei stores captured</p><div class="big">50</div><span class="unit">across 12 districts</span></div><div class="card metric"><p class="kicker">Address spot checks</p><div class="big">10/10</div><span class="unit">matched</span></div><div class="card metric"><p class="kicker">Coverage status</p><span class="pill warn">Not yet proven complete</span><p class="small">The collector used a fixed 60-page limit.</p></div><div class="card full"><p class="kicker">Q Burger stores by Taipei district · 50 captured</p><div class="district-chart"><div class="district-row"><span>文山區</span><div class="district-track"><i style="width:100%"></i></div><b>10</b></div><div class="district-row"><span>信義區</span><div class="district-track"><i style="width:70%"></i></div><b>7</b></div><div class="district-row"><span>中山區</span><div class="district-track"><i style="width:60%"></i></div><b>6</b></div><div class="district-row"><span>北投區</span><div class="district-track"><i style="width:60%"></i></div><b>6</b></div><div class="district-row"><span>內湖區</span><div class="district-track"><i style="width:40%"></i></div><b>4</b></div><div class="district-row"><span>士林區</span><div class="district-track"><i style="width:40%"></i></div><b>4</b></div><div class="district-row"><span>松山區</span><div class="district-track"><i style="width:40%"></i></div><b>4</b></div><div class="district-row"><span>中正區</span><div class="district-track"><i style="width:30%"></i></div><b>3</b></div><div class="district-row"><span>大安區</span><div class="district-track"><i style="width:20%"></i></div><b>2</b></div><div class="district-row"><span>大同區</span><div class="district-track"><i style="width:20%"></i></div><b>2</b></div><div class="district-row"><span>南港區</span><div class="district-track"><i style="width:10%"></i></div><b>1</b></div><div class="district-row"><span>萬華區</span><div class="district-track"><i style="width:10%"></i></div><b>1</b></div></div><p class="small">Counts describe captured records; full collection is not yet proven.</p></div><div class="card full"><p class="kicker">What changed during testing</p><div class="chain"><span>Official locator</span><b>→</b><span>Python pages</span><b>→</b><span>Taipei list</span><b>→</b><span>Address check</span></div><div class="next"><b>Next:</b> Use the Taipei filter, or continue until there is no next page.</div></div></div></section>
+    <section class="slide" data-slide="1" hidden aria-labelledby="s1"><p class="eyebrow"><span class="dot"></span> Test A2 · KoKo</p><h1 id="s1">Is the comparison list complete?</h1><p class="lead">The My Warm Day page loads additional records through JavaScript. A static retrieval captures only the first visible batch.</p><div class="grid"><div class="card metric"><p class="kicker">Rows captured</p><div class="big">18</div><span class="unit">first batch only</span></div><div class="card metric"><p class="kicker">District matches</p><div class="big">16/18</div><span class="unit">matched Taipei districts</span><div class="ratio-track"><i style="width:88.9%"></i></div><div class="ratio-label"><span>16 assigned to Taipei districts</span><span>2 not assigned</span></div></div><div class="card wide"><p class="kicker">Why it matters</p><h3>Citywide brand totals are not comparable yet.</h3><p class="small">The retrieved rows include non-Taipei or incomplete entries, and some store names look like addresses.</p><p class="small">KoKo’s 5-row brand-locator check matched 4/5; one store-name discrepancy remains.</p><div class="chain"><span>Static page</span><b>→</b><span>18 rows captured</span><b>→</b><span>More rows need JavaScript</span></div><div class="next"><b>Next:</b> Load “Browse More,” filter Taipei stores, then verify names and addresses.</div></div></div></section>
+  <section class="slide" data-slide="2" hidden aria-labelledby="s2"><p class="eyebrow"><span class="dot"></span> Test B · Natalia</p><h1 id="s2">Can we define one local case?</h1><p class="lead">Nanmen case circle · 500 m straight-line radius from Chiang Kai-shek Memorial Hall MRT Exit 2.</p><div class="grid"><div class="card wide"><p class="kicker">Distance from the official exit coordinate</p><div class="range"><div class="range-head"><span>Q Burger</span><span>476.7–492.9 m</span></div><div class="track"><div class="bar" style="left:95.34%;width:3.24%"></div></div><div class="scale"><span>MRT Exit 2</span><span>500 m boundary</span></div><small>Range across two coordinate sources; closest result is 7.1 m inside.</small></div><div class="range"><div class="range-head"><span>My Warm Day candidate address</span><span>377.9–399.5 m</span></div><div class="track"><div class="bar candidate" style="left:75.58%;width:4.32%"></div></div><div class="scale"><span>MRT Exit 2</span><span>500 m boundary</span></div><small>Range across two coordinate sources. Brand identity at No. 92 Ningbo West Street remains unconfirmed.</small></div></div><div class="card metric"><p class="kicker">Open-data limit</p><h3>Location, no breakfast hours</h3><p class="small">The restaurant file has coordinates but no opening hours or business type.</p><span class="pill warn">Partial</span></div><div class="card full"><div class="next"><b>Next:</b> Check a third coordinate source and find evidence for shop categories.</div></div></div></section>
+    <section class="slide" data-slide="3" hidden aria-labelledby="s3"><p class="eyebrow"><span class="dot"></span> Tests C + D · Ruby</p><h1 id="s3">The Agent ran locally. Cloud output is blocked.</h1><p class="lead">One local Gemini run produced draft events. Cloud and scheduled website publishing have not been proven.</p><div class="grid"><div class="card metric"><p class="kicker">Collected</p><div class="big">21 + 7</div><span class="unit">Q Burger articles + Young Qin headlines</span></div><div class="card metric"><p class="kicker">Agent output</p><div class="big">23</div><span class="unit">event candidates · 5 excluded</span></div><div class="card metric"><p class="kicker">Execution</p><div class="statusline" style="grid-template-columns:1fr"><div><span class="pill">D1 local · succeeded</span></div><div><span class="pill block">D2 cloud · blocked</span></div><div><span class="pill warn">D3 schedule · not started</span></div></div></div><div class="card full"><p class="kicker">AI event topic tags · one event may have multiple tags</p><div class="topic-list"><div class="topic-row"><span>Stores & expansion</span><div class="topic-track"><i style="width:100%"></i></div><b>12</b></div><div class="topic-row"><span>Membership & digital services</span><div class="topic-track"><i style="width:100%"></i></div><b>12</b></div><div class="topic-row"><span>Products & positioning</span><div class="topic-track"><i style="width:66.66666666666666%"></i></div><b>8</b></div><div class="topic-row"><span>Franchise & partnerships</span><div class="topic-track"><i style="width:25%"></i></div><b>3</b></div><div class="topic-row"><span>Finance & operations</span><div class="topic-track"><i style="width:16.666666666666664%"></i></div><b>2</b></div><div class="topic-row"><span>Channels & platforms</span><div class="topic-track"><i style="width:8.333333333333332%"></i></div><b>1</b></div></div></div><div class="card full"><p class="kicker">What stopped D2?</p><h3>An AI-returned URL did not exactly match the captured source URL.</h3><p class="small">GitHub Actions collected the pages, then stopped at validation. It produced no fresh cloud result. Young Qin articles currently support headline-only claims.</p><div class="next"><b>Next:</b> Gemini returns input_id; Python restores the exact URL, then D2 is retested.</div></div></div></section>
+    <section class="slide" data-slide="4" hidden aria-labelledby="s4"><p class="eyebrow"><span class="dot"></span> Verification · Kenny</p><h1 id="s4">A program pass is not a confirmed event.</h1><p class="lead">The program checks URLs and copied quotations. Human review must check whether each event claim is actually supported.</p><div class="grid"><div class="card metric"><p class="kicker">Program checks</p><div class="big">23/23</div><span class="unit">URLs opened</span><p class="small">Automated checks: 23/23 URLs opened; 22/23 quotes matched captured text.</p><div class="qa-list"><div class="qa-row"><span>URLs opened</span><div class="qa-track"><i style="width:100%"></i></div><b>23/23</b></div><div class="qa-row"><span>Quote match</span><div class="qa-track"><i style="width:95.7%"></i><i class="issue" style="width:4.3%"></i></div><b>22/23</b></div></div></div><div class="card wide"><p class="kicker">Current AI-assisted review</p><div class="review-totals"><div class="review-total confirmed"><strong>4</strong><span>Confirmed</span></div><div class="review-total pending"><strong>19</strong><span>Pending review</span></div></div><div class="stack"><div class="done"></div><div class="pending"></div></div></div><div class="card full"><p class="kicker">What needs another look</p><h3>17 bracket flags · only 3 source pages checked directly</h3><p class="small">A missing emoji was confirmed. Description and weekday/date issues also need attention. Counts of issue types can overlap.</p><p class="small">Separate store check: Kenny reviewed five rows; all five remain pending brand confirmation.</p><div class="next"><b>Next:</b> Review official pages or saved source text directly. 4/23 is the current confirmed share, not verified Agent accuracy.</div></div></div></section>
+  <section class="slide" data-slide="5" hidden aria-labelledby="s5"><p class="eyebrow"><span class="dot"></span> Integration · Tina</p><h1 id="s5">What can we carry into the SPA?</h1><p class="lead">The tests gave us a working starting point and a clear list of evidence and execution gaps.</p><div class="grid"><div class="card full"><p class="kicker">Current status</p><div class="statusline"><div><span class="pill">Worked</span><strong>Q Burger collection + local Agent run</strong><p>Usable test outputs, with coverage checks still needed.</p></div><div><span class="pill warn">Partial</span><strong>My Warm Day + Nanmen + review</strong><p>More source checks and classification are needed.</p></div><div><span class="pill block">Blocked</span><strong>Fresh cloud result</strong><p>D2 stopped at source URL validation; D3 has not started.</p></div></div></div><div class="card half"><p class="kicker">PRD changes from testing</p><ul><li>Restore URLs from input_id.</li><li>Preserve exact source quotes.</li><li>Label headline-only evidence.</li><li>Label local vs. cloud runs.</li></ul></div><div class="card half"><p class="kicker">Next presentation and website</p><ul><li>Statistics with coverage labels.</li><li>Sourced Trend Agent events.</li><li>Business insights with limits.</li></ul></div></div><div class="next"><b>Conclusion:</b> W12 shows a local Agent run can produce draft data; automatic cloud-to-website updates are not yet verified.</div></section>
+  </main>
+  <footer><span class="hint">W12 test records · 2026-11-21–22 · Use ← → to navigate</span><span id="announcer" class="count" aria-live="polite">01 / 06</span><div class="controls"><button id="prev" type="button" disabled>Previous</button><button id="next" type="button">Next</button></div></footer>
+</div>
+<script>
+(() => {
+  // Keep the English source text in the HTML; switch only the visible copy.
+  const zh = new Map([
+    ['· W12 Checkpoint','· W12 階段報告'],
+    ['W12 test question','W12 測試問題'],
+    ['Can our workflow turn collected data into a verified website update?','我們的流程能否把蒐集到的資料整理、查核後更新到網站？'],
+    ['Overall result','整體結果'],
+    ['One local Agent run worked; automatic cloud updates are not yet proven.','Agent 本機執行成功一次；雲端自動更新尚未證實。'],
+    ['Q Burger stores by Taipei district · 50 captured','Q Burger 台北各區門市 · 已取得 50 筆'],
+    ['Static page','靜態頁面'],
+    ['18 rows captured','取得 18 筆資料'],
+    ['More rows need JavaScript','更多資料需要 JavaScript 載入'],
+    ['Counts describe captured records; full collection is not yet proven.','圖表統計目前取得的資料，尚未證明門市已完整蒐集。'],
+    ['16 assigned to Taipei districts','16 筆歸入台北行政區'],
+    ['2 not assigned','2 筆尚未歸入台北行政區'],
+    ['MRT Exit 2','捷運出口 2 號'],
+    ['500 m boundary','500 公尺範圍'],
+    ['Range across two coordinate sources; closest result is 7.1 m inside.','兩種座標來源的距離範圍；最近邊界的結果僅在圈內 7.1 公尺。'],
+    ['Range across two coordinate sources. Brand identity at No. 92 Ningbo West Street remains unconfirmed.','兩種座標來源的距離範圍。寧波西街 92 號是否為麥味登，仍待確認。'],
+    ['One local Gemini run produced draft events. Cloud and scheduled website publishing have not been proven.','Gemini 本機執行一次並產生事件草稿；雲端與排程發布尚未證實。'],
+    ['AI event topic tags · one event may have multiple tags','AI 事件主題標籤 · 一個事件可能有多個標籤'],
+    ['Stores & expansion','門市與展店'],
+    ['Membership & digital services','會員與數位服務'],
+    ['Products & positioning','產品與定位'],
+    ['Franchise & partnerships','加盟與合作'],
+    ['Finance & operations','財務與營運'],
+    ['Channels & platforms','通路與平台'],
+    ['Automated source and quote checks','自動來源與引文檢查'],
+    ['URLs opened','網址可開啟'],
+    ['Quote match','引文相符'],
+    ['Conclusion:','結論：'],
+    ['W12 shows a local Agent run can produce draft data; automatic cloud-to-website updates are not yet verified.','W12 證明 Agent 本機執行可產生資料草稿；雲端自動更新網站尚未驗證。'],
+    ['TEAM REVIEW DRAFT','組員確認版'],
+    ['Angus · A1','Angus · A1 門市'],
+    ['KoKo · A2','KoKo · A2 門市'],
+    ['Natalia · B','Natalia · B 商圈'],
+    ['Ruby · C/D','Ruby · C/D Agent'],
+    ['Kenny · Review','Kenny · 查核'],
+    ['Tina · Act','Tina · 整合'],
+    ['Test A1 · Angus','測試 A1 · Angus'],
+    ['Can we collect Q Burger stores?','我們能取得 Q Burger 門市資料嗎？'],
+    ['We tested the data-to-website path before building the report site: stores, local geography, Agent output, verification, and cloud execution.','建置報告網站前，我們先測試門市資料、商圈座標、Agent 產出、資料查核及雲端執行。'],
+    ['Taipei stores captured','取得的台北門市'],
+    ['across 12 districts','分布於 12 個行政區'],
+    ['Address spot checks','地址抽查'],
+    ['matched','一致'],
+    ['Coverage status','蒐集完整性'],
+    ['Not yet proven complete','尚未確認完整'],
+    ['The collector used a fixed 60-page limit.','程式設定最多抓取 60 頁。'],
+    ['What changed during testing','測試流程'],
+    ['Official locator','品牌官網門市頁'],
+    ['Python pages','Python 抓取'],
+    ['Taipei list','台北門市清單'],
+    ['Address check','地址抽查'],
+    ['Next:','下一步：'],
+    ['Use the Taipei filter, or continue until there is no next page.','使用官網台北篩選，或抓到沒有下一頁為止。'],
+    ['Test A2 · KoKo','測試 A2 · KoKo'],
+    ['Is the comparison list complete?','競爭品牌清單抓齊了嗎？'],
+    ['The My Warm Day page loads additional records through JavaScript. A static retrieval captures only the first visible batch.','麥味登網站用 JavaScript 載入更多門市；靜態抓取只取得第一批資料。'],
+    ['Rows captured','取得筆數'],
+    ['first batch only','只有第一批'],
+    ['District matches','符合台北行政區'],
+    ['matched Taipei districts','筆符合台北行政區'],
+    ['Why it matters','分析影響'],
+    ['Citywide brand totals are not comparable yet.','目前還不能比較兩品牌的全市店數。'],
+    ['The retrieved rows include non-Taipei or incomplete entries, and some store names look like addresses.','資料含非台北或欄位不完整的紀錄；部分店名看起來像地址。'],
+    ['KoKo’s 5-row brand-locator check matched 4/5; one store-name discrepancy remains.','KoKo 抽查 5 筆品牌門市資料，有 4 筆相符，另有 1 筆店名不一致。'],
+    ['Separate store check: Kenny reviewed five rows; all five remain pending brand confirmation.','另一項門市查核：Kenny 檢查的 5 筆資料都還待品牌確認。'],
+    ['Load “Browse More,” filter Taipei stores, then verify names and addresses.','載入「瀏覽更多」、篩出台北門市，再核對店名與地址。'],
+    ['Test B · Natalia','測試 B · Natalia'],
+    ['Can we define one local case?','能建立一個商圈案例嗎？'],
+    ['Nanmen case circle · 500 m straight-line radius from Chiang Kai-shek Memorial Hall MRT Exit 2.','南門案例圈：以中正紀念堂站 2 號出口為圓心，直線半徑 500 公尺。'],
+    ['Distance from the official exit coordinate','距官方捷運出口座標'],
+    ['My Warm Day candidate address','麥味登候選地址'],
+    ['Only 7.1 m inside the boundary with one coordinate source.','依其中一個座標來源，Q Burger 只在圈內 7.1 公尺。'],
+    ['Brand identity at No. 92 Ningbo West Street remains unconfirmed.','寧波西街 92 號是否為麥味登，仍待確認。'],
+    ['Open-data limit','開放資料限制'],
+    ['Location, no breakfast hours','有位置，沒有早餐時段'],
+    ['The restaurant file has coordinates but no opening hours or business type.','餐館業清冊有座標，但沒有營業時間和店家類別。'],
+    ['Partial','部分完成'],
+    ['Check a third coordinate source and find evidence for shop categories.','以第三個座標來源核對，並尋找店家分類的證據。'],
+    ['Tests C + D · Ruby','測試 C＋D · Ruby'],
+    ['The Agent ran locally. Cloud output is blocked.','Agent 本機成功，雲端產出受阻。'],
+    ['Python collected specified official pages; Gemini drafted event records with links back to their sources.','Python 蒐集指定官網頁面；Gemini 草擬事件紀錄並附來源連結。'],
+    ['Collected','已蒐集'],
+    ['Q Burger articles + Young Qin headlines','篇 Q Burger 文章＋揚秦新聞標題'],
+    ['Agent output','Agent 產出'],
+    ['event candidates · 5 excluded','筆候選事件；另排除 5 筆'],
+    ['Execution','執行狀態'],
+    ['D1 local · succeeded','D1 本機 · 成功'],
+    ['D2 cloud · blocked','D2 雲端 · 受阻'],
+    ['D3 schedule · not started','D3 排程 · 未開始'],
+    ['What stopped D2?','D2 為何受阻？'],
+    ['An AI-returned URL did not exactly match the captured source URL.','AI 回傳的網址與原始來源網址不完全一致。'],
+    ['GitHub Actions collected the pages, then stopped at validation. It produced no fresh cloud result. Young Qin articles currently support headline-only claims.','GitHub Actions 已抓取頁面，但在驗證階段停止，沒有產生新的雲端結果。揚秦資料目前只能用標題佐證。'],
+    ['Gemini returns input_id; Python restores the exact URL, then D2 is retested.','由 Gemini 回傳 input_id，再由 Python 還原原始網址並重測 D2。'],
+    ['Verification · Kenny','查核 · Kenny'],
+    ['A program pass is not a confirmed event.','程式通過，不等於事件已確認。'],
+    ['The program checks URLs and copied quotations. Human review must check whether each event claim is actually supported.','程式檢查網址與引文；組員還需確認每項事件主張是否真的有來源支持。'],
+    ['Program checks','程式查核'],
+    ['URLs opened','個網址可開啟'],
+    ['22/23 quotations matched captured text.','22/23 筆引文符合抓取的原文。'],
+    ['Current AI-assisted review','目前 AI 輔助審查'],
+    ['Confirmed','已確認'],
+    ['Pending review','待審查'],
+    ['What needs another look','仍須複查'],
+    ['17 bracket flags · only 3 source pages checked directly','17 筆括號差異標記；僅直接查核 3 個來源頁面'],
+    ['A missing emoji was confirmed. Description and weekday/date issues also need attention. Counts of issue types can overlap.','已確認一筆漏掉 emoji；描述及星期與日期的問題也需檢查。問題類型的筆數可能重疊。'],
+    ['Review official pages or saved source text directly. 4/23 is the current confirmed share, not verified Agent accuracy.','直接查核官網頁面或儲存的原文。4/23 是目前確認比例，不能視為 Agent 準確率。'],
+    ['Integration · Tina','整合 · Tina'],
+    ['What can we carry into the SPA?','哪些成果可以放進網站？'],
+    ['The tests gave us a working starting point and a clear list of evidence and execution gaps.','這些測試提供了可用的起點，也指出資料證據與執行流程的缺口。'],
+    ['Current status','目前狀態'],
+    ['Worked','已運作'],
+    ['Q Burger collection + local Agent run','Q Burger 門市蒐集＋Agent 本機執行'],
+    ['Usable test outputs, with coverage checks still needed.','已有可用測試結果，仍須確認蒐集完整性。'],
+    ['My Warm Day + Nanmen + review','麥味登＋南門案例圈＋資料審查'],
+    ['More source checks and classification are needed.','仍需補充來源查核與店家分類。'],
+    ['Blocked','受阻'],
+    ['Fresh cloud result','新的雲端產出'],
+    ['D2 stopped at source URL validation; D3 has not started.','D2 停在來源網址驗證；D3 尚未開始。'],
+    ['PRD changes from testing','測試後的 PRD 修訂'],
+    ['Restore URLs from input_id.','由 input_id 還原網址。'],
+    ['Preserve exact source quotes.','保留來源原文。'],
+    ['Label headline-only evidence.','標示僅有標題的證據。'],
+    ['Label local vs. cloud runs.','區分本機與雲端執行。'],
+    ['Next presentation and website','後續報告與網站'],
+    ['Statistics with coverage labels.','呈現統計數字及涵蓋範圍。'],
+    ['Sourced Trend Agent events.','呈現附來源的趨勢事件。'],
+    ['Business insights with limits.','提出有證據界線的商業洞察。'],
+    ['W12 test records · 2026-11-21–22 · Use ← → to navigate','W12 測試紀錄 · 2026-11-21–22 · 使用 ← → 切換'],
+    ['Previous','上一頁'],
+    ['Next','下一頁']
+  ]);
+  const originals = new Map();
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  while (walker.nextNode()) {
+    const node = walker.currentNode;
+    if (node.parentElement?.closest('script,style')) continue;
+    const key = node.nodeValue.trim();
+    if (zh.has(key)) originals.set(node, node.nodeValue);
+  }
+  const toggle = document.getElementById('lang-toggle');
+  let language = 'en';
+  function setLanguage(nextLanguage) {
+    language = nextLanguage;
+    for (const [node, original] of originals) {
+      const translated = zh.get(original.trim());
+      node.nodeValue = language === 'zh' ? original.replace(original.trim(), translated) : original;
+    }
+    document.documentElement.lang = language === 'zh' ? 'zh-Hant' : 'en';
+    document.title = language === 'zh' ? 'G1 W12 階段報告 · 早餐地圖' : 'G1 W12 Checkpoint · Breakfast Atlas';
+    document.getElementById('tabs').setAttribute('aria-label', language === 'zh' ? '報告章節' : 'Presentation sections');
+    toggle.textContent = language === 'zh' ? 'English' : '中文';
+    toggle.lang = language === 'zh' ? 'en' : 'zh-Hant';
+    toggle.setAttribute('aria-label', language === 'zh' ? 'Switch to English' : '切換成中文');
+    const active = document.querySelector('.slide:not([hidden])');
+    if (active) active.setAttribute('aria-label', active.querySelector('h1').textContent);
+  }
+  toggle.addEventListener('click', () => setLanguage(language === 'en' ? 'zh' : 'en'));
+  const slides=[...document.querySelectorAll('[data-slide]')];
+  const tabs=[...document.querySelectorAll('[data-go]')];
+  const previous=document.getElementById('prev');
+  const next=document.getElementById('next');
+  const announcer=document.getElementById('announcer');
+  let current=0;
+  function show(index,focus=false){
+    current=Math.max(0,Math.min(index,slides.length-1));
+    slides.forEach((slide,i)=>{slide.hidden=i!==current});
+    tabs.forEach((tab,i)=>{if(i===current)tab.setAttribute('aria-current','step');else tab.removeAttribute('aria-current')});
+    previous.disabled=current===0;next.disabled=current===slides.length-1;
+    announcer.textContent=String(current+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');
+    history.replaceState(null,'','#'+(current+1));
+    tabs[current].scrollIntoView({block:'nearest',inline:'nearest'});
+    if(focus)slides[current].querySelector('h1').focus({preventScroll:true});
+    window.scrollTo({top:0,behavior:'auto'});
+  }
+  tabs.forEach(tab=>tab.addEventListener('click',()=>show(Number(tab.dataset.go))));
+  previous.addEventListener('click',()=>show(current-1));
+  next.addEventListener('click',()=>show(current+1));
+  window.addEventListener('keydown',event=>{
+    if(['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName))return;
+    if(event.key==='ArrowRight'||event.key==='PageDown'){event.preventDefault();show(current+1)}
+    if(event.key==='ArrowLeft'||event.key==='PageUp'){event.preventDefault();show(current-1)}
+    if(event.key==='Home'){event.preventDefault();show(0)}
+    if(event.key==='End'){event.preventDefault();show(slides.length-1)}
+  });
+  window.addEventListener('hashchange',()=>{const n=Number(location.hash.slice(1));if(Number.isInteger(n)&&n>=1&&n<=slides.length)show(n-1)});
+  const initial=Number(location.hash.slice(1));show(Number.isInteger(initial)?initial-1:0);
+})();
+</script>
+</body>
+</html>
